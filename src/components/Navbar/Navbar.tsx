@@ -53,15 +53,15 @@ function Navbar() {
   const handleMobileLinkClick = (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
 
-    const targetSelector = event.currentTarget.getAttribute("href");
+    const targetId = event.currentTarget.getAttribute("href")?.replace("#", "");
     setIsMenuOpen(false);
     document.body.style.overflow = "";
 
-    if (!targetSelector) return;
+    if (!targetId) return;
 
     requestAnimationFrame(() => {
-      window.setTimeout(() => {
-        const target = document.querySelector<HTMLElement>(targetSelector);
+      requestAnimationFrame(() => {
+        const target = document.getElementById(targetId);
         const navigation = document.querySelector<HTMLElement>('nav[aria-label="Primary"]');
 
         if (!target) return;
@@ -73,7 +73,7 @@ function Navbar() {
           top: Math.max(0, targetTop),
           behavior: "smooth",
         });
-      }, 0);
+      });
     });
   };
 
