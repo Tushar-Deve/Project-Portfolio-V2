@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from "react";
+import { type MouseEvent, useEffect, useId, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Menu, X } from "lucide-react";
 
@@ -50,6 +50,33 @@ function Navbar() {
     };
   }, [isMenuOpen]);
 
+  const handleMobileLinkClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+
+    const targetSelector = event.currentTarget.getAttribute("href");
+    setIsMenuOpen(false);
+    document.body.style.overflow = "";
+
+    if (!targetSelector) return;
+
+    requestAnimationFrame(() => {
+      window.setTimeout(() => {
+        const target = document.querySelector<HTMLElement>(targetSelector);
+        const navigation = document.querySelector<HTMLElement>('nav[aria-label="Primary"]');
+
+        if (!target) return;
+
+        const navigationHeight = navigation?.getBoundingClientRect().height ?? 0;
+        const targetTop = target.getBoundingClientRect().top + window.scrollY - navigationHeight;
+
+        window.scrollTo({
+          top: Math.max(0, targetTop),
+          behavior: "smooth",
+        });
+      }, 0);
+    });
+  };
+
   return (
     <motion.header
       initial={shouldReduceMotion ? false : { y: -16, opacity: 0 }}
@@ -100,7 +127,7 @@ function Navbar() {
             <ul className="flex flex-col px-5 py-3">
               {navLinks.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className={mobileLinkClass({ isActive: link.label === "Home" })} onClick={() => setIsMenuOpen(false)}>
+                  <a href={link.href} className={mobileLinkClass({ isActive: link.label === "Home" })} onClick={handleMobileLinkClick}>
                     {link.label}
                   </a>
                 </li>
