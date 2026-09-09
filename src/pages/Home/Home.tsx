@@ -87,7 +87,7 @@ function Home() {
           <div className="mt-9">
             <motion.div whileHover={shouldReduceMotion ? undefined : { y: -2 }} whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}>
               <a
-                href="/resume/Tushar-Resume.pdf"
+                href="/resume/Tushar-Resume-1.pdf"
                 download
                 className="inline-flex w-full items-center justify-center gap-2 rounded-sm border border-accent/70 bg-accent px-5 py-3 text-md font-semibold tracking-wide text-[#fff8f2] transition-colors duration-200 hover:bg-accent-soft sm:w-auto"
               >
