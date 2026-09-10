@@ -24,8 +24,8 @@ export const projects: Project[] = [
 		image: "/images/Test_marks_entry_&_viewer.png",
 		description: "A streamlined system for entering and viewing test marks with a user-friendly interface.",
 		technologies: ["React.js", "Node.js,Express.js", "PostgreSQL"],
-		githubUrl: "https://github.com/Tushar-Deve/frontend",
-		liveUrl: "https://frontend-beta-flame-64.vercel.app/",
+		githubUrl: "https://github.com/Tushar-Deve/test-marks-entry-and-viewer-system",
+		liveUrl: "https://test-marks-entry-and-viewer-system.vercel.app/",
 	},
 	{
 		id: 3,
