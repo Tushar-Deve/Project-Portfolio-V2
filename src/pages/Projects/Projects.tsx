@@ -176,11 +176,11 @@ function Projects() {
     <section
       id="projects"
       aria-label="Projects"
-      className="relative flex min-h-[calc(100dvh-4rem)] items-center overflow-hidden scroll-mt-16 px-5 py-3 sm:px-8 sm:py-4 lg:px-16 lg:py-5"
+      className="relative flex min-h-[calc(100dvh-4rem)] items-center overflow-visible scroll-mt-16 px-5 py-10 sm:px-8 sm:py-12 lg:px-16 lg:py-14"
     >
       <div className="mx-auto flex w-full max-w-[1440px] flex-col justify-center">
         {/* Header */}
-        <header className="relative -top-8 max-w-2xl pl-1 sm:-top-10 sm:pl-4 lg:-top-8">
+        <header className="max-w-2xl pl-1 sm:pl-4">
           <p className="text-2xl font-bold uppercase tracking-[0.28em] text-accent-soft">
             ~ Portfolio ~
           </p>
@@ -196,7 +196,7 @@ function Projects() {
         </header>
 
         {/* Carousel and pagination */}
-        <div className="relative -top-1 mt-2 flex w-full flex-col items-center">
+        <div className="mt-5 flex w-full flex-col items-center">
           <div className="relative mx-auto grid w-full max-w-[1120px] items-center gap-4 md:grid-cols-[minmax(0,0.65fr)_minmax(0,1.15fr)_minmax(0,0.65fr)] lg:gap-6">
           <button
             type="button"

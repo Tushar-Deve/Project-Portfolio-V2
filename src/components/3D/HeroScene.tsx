@@ -122,7 +122,22 @@ function AmbientGeometry({ reduced }: { reduced: boolean }) {
 
 function HeroScene() {
   const shouldReduceMotion = useReducedMotion() ?? false;
-  return <div className="absolute inset-0 overflow-hidden"><Canvas className="absolute inset-0" camera={{ position: [0, 0, 6], fov: 50 }} dpr={[1, 1.5]} frameloop={shouldReduceMotion ? "demand" : "always"} gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }} style={{ pointerEvents: "none" }}><AmbientGeometry reduced={shouldReduceMotion} /></Canvas><TechnologyRain reduced={shouldReduceMotion} /><div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_24%_42%,transparent_0%,rgba(15,13,11,0.18)_46%,rgba(15,13,11,0.72)_100%)]" /></div>;
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      <Canvas
+        className="absolute inset-0"
+        camera={{ position: [0, 0, 6], fov: 50 }}
+        dpr={[1, 1.5]}
+        frameloop={shouldReduceMotion ? "demand" : "always"}
+        gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
+        style={{ pointerEvents: "none" }}
+      >
+        <AmbientGeometry reduced={shouldReduceMotion} />
+      </Canvas>
+      <TechnologyRain reduced={shouldReduceMotion} />
+      <div className="hero-vignette pointer-events-none absolute inset-0" />
+    </div>
+  );
 }
 
 export default HeroScene;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { Download, Mail } from "lucide-react";
+import { Download, Mail, Award } from "lucide-react";
 
 const rotatingPhrases = [
   "Building modern web experiences.",
@@ -48,7 +48,11 @@ function RotatingPhrase() {
   );
 }
 
-function Home() {
+type HomeProps = {
+  onViewCertificate?: () => void;
+};
+
+function Home({ onViewCertificate }: HomeProps) {
   const shouldReduceMotion = useReducedMotion();
 
   return (
@@ -84,7 +88,7 @@ function Home() {
             I design and build thoughtful, responsive web experiences that balance strong engineering with clear, usable interfaces.
           </motion.p>
 
-          <div className="mt-9">
+          <div className="mt-9 flex flex-col gap-3.5 sm:flex-row sm:items-center">
             <motion.div whileHover={shouldReduceMotion ? undefined : { y: -2 }} whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}>
               <a
                 href="/resume/Tushar-Resume.pdf"
@@ -95,6 +99,19 @@ function Home() {
                 Download Resume
               </a>
             </motion.div>
+
+            {onViewCertificate ? (
+              <motion.div whileHover={shouldReduceMotion ? undefined : { y: -2 }} whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}>
+                <button
+                  type="button"
+                  onClick={onViewCertificate}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-sm border border-accent/40 bg-ink-soft/50 px-5 py-3 text-md font-semibold tracking-wide text-accent-soft backdrop-blur-sm transition-all duration-200 hover:border-accent hover:bg-accent/15 sm:w-auto"
+                >
+                  <Award size={16} aria-hidden="true" />
+                  View Certificate
+                </button>
+              </motion.div>
+            ) : null}
           </div>
 
           <div className="mt-10 flex w-fit items-center justify-center gap-9 sm:gap-15">

@@ -1,17 +1,37 @@
 @import "tailwindcss";
 
+:root {
+  --theme-ink: #0f0d0b;
+  --theme-ink-soft: #191512;
+  --theme-accent: #c96a24;
+  --theme-accent-soft: #e58a3a;
+}
+
+html.light,
+[data-theme="light"] {
+  --theme-ink: #fcfbfa;
+  --theme-ink-soft: #f5efe8;
+  --theme-accent: #c96a24;
+  --theme-accent-soft: #b85a19;
+}
+
 @theme {
   --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Syne", ui-sans-serif, system-ui, sans-serif;
-  --color-ink: #0f0d0b;
-  --color-ink-soft: #191512;
-  --color-accent: #c96a24;
-  --color-accent-soft: #e58a3a;
+  --color-ink: var(--theme-ink);
+  --color-ink-soft: var(--theme-ink-soft);
+  --color-accent: var(--theme-accent);
+  --color-accent-soft: var(--theme-accent-soft);
 }
 
 html {
   background-color: var(--color-ink);
   scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+html.light {
+  color-scheme: light;
 }
 
 body {
@@ -22,6 +42,282 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+html.light body {
+  color: #1a1613;
+}
+
+/* Base smooth transition for theme switches */
+html,
+body,
+header,
+article,
+section,
+nav,
+input,
+textarea {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* ==========================================================================
+   LIGHT MODE RULES & OVERRIDES
+   ========================================================================== */
+
+/* Typography & Headings in Light Mode */
+html.light .text-white:not(.bg-accent *):not(.bg-accent),
+html.light .text-\[\#f5f1ea\]:not(.bg-accent *):not(.bg-accent) {
+  color: #181512;
+}
+
+html.light .text-zinc-300:not(.bg-accent *):not(.bg-accent),
+html.light .text-zinc-200:not(.bg-accent *):not(.bg-accent) {
+  color: #3f3933;
+}
+
+html.light .text-\[\#a9a19a\],
+html.light .text-\[\#aaa099\],
+html.light .text-\[\#b7ada4\],
+html.light .text-\[\#d8d1ca\],
+html.light .text-\[\#d8d2cc\],
+html.light .text-\[\#e8e2dc\]:not(.bg-accent *) {
+  color: #554e47;
+}
+
+/* Ensure primary accent buttons retain crisp white text in both themes */
+.bg-accent,
+.bg-accent *,
+a.bg-accent,
+button.bg-accent {
+  color: #fff8f2 !important;
+}
+
+/* Navbar in Light Mode */
+html.light header.sticky {
+  background-color: rgba(252, 251, 250, 0.88);
+  border-bottom-color: rgba(201, 106, 36, 0.16);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+}
+
+html.light header nav a.text-white {
+  color: #181512;
+}
+
+html.light header nav a.text-\[\#a9a19a\] {
+  color: #615951;
+}
+
+html.light header nav a.text-\[\#a9a19a\]:hover {
+  color: #181512;
+}
+
+html.light header button.text-zinc-200 {
+  color: #181512;
+}
+
+/* Mobile dropdown menu */
+html.light header .md\:hidden {
+  background-color: rgba(252, 251, 250, 0.98);
+  border-top-color: rgba(201, 106, 36, 0.15);
+}
+
+/* Social Icon (GitHub in Home section) */
+html.light a.text-\[\#e6edf3\] {
+  color: #24292f;
+}
+
+/* About Section in Light Mode */
+html.light #about .bg-ink-soft\/10 {
+  background-color: rgba(255, 255, 255, 0.75);
+  border-color: rgba(201, 106, 36, 0.22);
+  box-shadow: 0 4px 20px -2px rgba(201, 106, 36, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+}
+
+html.light #about .bg-ink-soft\/10:hover {
+  background-color: rgba(255, 255, 255, 0.92);
+  border-color: rgba(201, 106, 36, 0.45);
+  box-shadow: 0 10px 25px -4px rgba(201, 106, 36, 0.12);
+}
+
+html.light #about .border-white\/10.bg-black\/10 {
+  border-color: rgba(201, 106, 36, 0.18);
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #2d2621;
+}
+
+/* Light skill icon colors (Next.js, Express, Cursor, GitHub) turn dark in light mode */
+html.light #about .border-white\/10.bg-black\/10 svg[style*="rgb(245, 241, 234)"],
+html.light #about .border-white\/10.bg-black\/10 svg[style*="#f5f1ea"],
+html.light #about .border-white\/10.bg-black\/10 svg[style*="#d8d1ca"] {
+  color: #1f1b18 !important;
+}
+
+/* Experience Section in Light Mode */
+html.light #experience .bg-ink-soft\/45 {
+  background-color: rgba(255, 255, 255, 0.85);
+  border-color: rgba(201, 106, 36, 0.3);
+  box-shadow: 0 18px 45px -10px rgba(201, 106, 36, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+html.light #experience .border-accent\/20,
+html.light #experience .border-accent\/15 {
+  border-color: rgba(201, 106, 36, 0.18);
+}
+
+html.light #experience .bg-accent\/10 {
+  background-color: rgba(201, 106, 36, 0.12);
+}
+
+/* Companion "View Certificate" button in Home */
+html.light #home button.border-accent\/40 {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(201, 106, 36, 0.4);
+  color: #c96a24;
+}
+
+html.light #home button.border-accent\/40:hover {
+  background-color: rgba(201, 106, 36, 0.15);
+  border-color: var(--color-accent);
+}
+
+/* Certificate Modal in Light Mode */
+html.light [role="dialog"] .bg-ink-soft\/95 {
+  background-color: rgba(253, 251, 248, 0.98);
+  border-color: rgba(201, 106, 36, 0.35);
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.25);
+}
+
+html.light [role="dialog"] .bg-ink\/50,
+html.light [role="dialog"] .bg-ink\/40,
+html.light [role="dialog"] .bg-ink\/30 {
+  background-color: rgba(246, 240, 233, 0.75);
+  border-color: rgba(201, 106, 36, 0.18);
+}
+
+html.light [role="dialog"] .text-\[\#9f958d\] {
+  color: #61574f;
+}
+
+html.light [role="dialog"] .text-\[\#e8ded3\] {
+  color: #8c420f;
+  font-weight: 500;
+}
+
+/* Projects Section in Light Mode */
+html.light #projects .bg-ink-soft\/55 {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(201, 106, 36, 0.35);
+  box-shadow: 0 20px 45px -10px rgba(201, 106, 36, 0.1), 0 8px 16px -4px rgba(0, 0, 0, 0.04);
+}
+
+html.light #projects .bg-ink-soft\/80 {
+  background-color: #f1eae2;
+}
+
+html.light #projects .bg-ink-soft\/25 {
+  background-color: rgba(255, 255, 255, 0.65);
+  border-color: rgba(201, 106, 36, 0.15);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04);
+}
+
+html.light #projects .bg-accent\/5 {
+  background-color: rgba(201, 106, 36, 0.12);
+  border-color: rgba(201, 106, 36, 0.3);
+  color: #a34e12;
+  font-weight: 500;
+}
+
+html.light #projects a.border-white\/15 {
+  border-color: rgba(201, 106, 36, 0.3);
+  color: #1a1613;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+html.light #projects a.border-white\/15:hover {
+  border-color: var(--color-accent);
+  background-color: rgba(201, 106, 36, 0.12);
+}
+
+html.light #projects button.bg-ink\/70 {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(201, 106, 36, 0.35);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+html.light #projects button.bg-ink\/70:hover {
+  background-color: rgba(201, 106, 36, 0.15);
+}
+
+html.light #projects .bg-white\/25 {
+  background-color: rgba(0, 0, 0, 0.18);
+}
+
+html.light #projects .bg-white\/25:hover {
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+/* Contact Form in Light Mode */
+html.light #contact form input,
+html.light #contact form textarea {
+  background-color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(201, 106, 36, 0.25);
+  color: #1a1613;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+html.light #contact form input::placeholder,
+html.light #contact form textarea::placeholder {
+  color: #8c8278;
+}
+
+html.light #contact form input:focus,
+html.light #contact form textarea:focus {
+  border-color: var(--color-accent-soft);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(201, 106, 36, 0.15);
+}
+
+html.light #contact label {
+  color: #38322c;
+  font-weight: 600;
+}
+
+/* Hero Falling Tech Tiles & Ambient Elements in Light Mode */
+html.light .tech-object {
+  border: 1px solid rgba(201, 106, 36, 0.4);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(254, 245, 237, 0.9) 45%, rgba(245, 232, 220, 0.95) 100%);
+  box-shadow: inset 1.5px 1.5px 0 rgba(255, 255, 255, 0.95),
+              inset -4px -5px 10px rgba(201, 106, 36, 0.12),
+              6px 9px 0 rgba(201, 106, 36, 0.18),
+              12px 18px 22px rgba(0, 0, 0, 0.08);
+}
+
+html.light .tech-object::after {
+  border-top: 1px solid rgba(255, 255, 255, 0.8);
+  border-left: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+html.light .tech-object__icon {
+  filter: drop-shadow(1px 2px 0 rgba(201, 106, 36, 0.25)) drop-shadow(0 0 6px color-mix(in srgb, var(--logo-color) 25%, transparent));
+}
+
+html.light .tech-rain-item[style*="--logo-color: #f5f1ea"] .tech-object__icon,
+html.light .tech-rain-item[style*="--logo-color: #e8e2dc"] .tech-object__icon {
+  color: #1a1613 !important;
+  filter: drop-shadow(1px 2px 0 rgba(201, 106, 36, 0.25));
+}
+
+.hero-vignette {
+  background: radial-gradient(circle at 65% 50%, rgba(201, 106, 36, 0.08) 0%, transparent 60%);
+}
+
+html.light .hero-vignette {
+  background: radial-gradient(circle at 65% 50%, rgba(201, 106, 36, 0.06) 0%, transparent 65%);
+}
+
+html.light .site-ambient::before,
+html.light .site-ambient::after {
+  border-color: rgba(201, 106, 36, 0.22);
 }
 
 #root {
