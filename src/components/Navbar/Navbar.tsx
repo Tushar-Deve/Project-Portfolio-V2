@@ -1,4 +1,4 @@
-import { type MouseEvent, useEffect, useId, useState } from "react";
+import { type MouseEvent, useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "../../context/ThemeContext";
@@ -32,6 +32,7 @@ function mobileLinkClass({ isActive }: { isActive: boolean }) {
 function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pendingMobileTarget = useRef<string | null>(null);
   const menuId = useId();
   const shouldReduceMotion = useReducedMotion();
 
@@ -56,26 +57,28 @@ function Navbar() {
   const handleMobileLinkClick = (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
 
-    const targetId = event.currentTarget.getAttribute("href")?.replace("#", "");
+    pendingMobileTarget.current = event.currentTarget.getAttribute("href")?.replace("#", "") ?? null;
     setIsMenuOpen(false);
-    document.body.style.overflow = "";
+  };
+
+  const handleMobileMenuExit = () => {
+    const targetId = pendingMobileTarget.current;
+    pendingMobileTarget.current = null;
 
     if (!targetId) return;
 
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const target = document.getElementById(targetId);
-        const navigation = document.querySelector<HTMLElement>('nav[aria-label="Primary"]');
+      const target = document.getElementById(targetId);
+      const navigation = document.querySelector<HTMLElement>('nav[aria-label="Primary"]');
 
-        if (!target) return;
+      if (!target) return;
 
-        const navigationHeight = navigation?.getBoundingClientRect().height ?? 0;
-        const targetTop = target.getBoundingClientRect().top + window.scrollY - navigationHeight;
+      const navigationHeight = navigation?.getBoundingClientRect().height ?? 0;
+      const targetTop = target.getBoundingClientRect().top + window.scrollY - navigationHeight;
 
-        window.scrollTo({
-          top: Math.max(0, targetTop),
-          behavior: "smooth",
-        });
+      window.scrollTo({
+        top: Math.max(0, targetTop),
+        behavior: "smooth",
       });
     });
   };
@@ -140,7 +143,7 @@ function Navbar() {
         </div>
       </nav>
 
-      <AnimatePresence>
+      <AnimatePresence onExitComplete={handleMobileMenuExit}>
         {isMenuOpen ? (
           <motion.div
             id={menuId}
